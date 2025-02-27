@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     Button button0, button1, button2, button3, button4, button5, button6, button7, button8, button9;
     Button buttonCANC, buttonEliminaultimonum;
     TextView textView;
+    private boolean virgolaInserita = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,15 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener numberListener = v -> {
             if (v instanceof Button) {
                 Button b = (Button) v;
-                textView.append(b.getText().toString());
+                String text = b.getText().toString();
+                if (text.equals(".")) {
+                    if (!virgolaInserita) {
+                        textView.append(text);
+                        virgolaInserita = true;
+                    }
+                } else {
+                    textView.append(text);
+                }
             }
         };
 
@@ -57,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener operationListener = v -> {
             if (v instanceof Button) {
                 Button b = (Button) v;
-                textView.append(" " + b.getText().toString() + " ");
+                textView.append(b.getText().toString());
+                virgolaInserita = false; // Resetta la variabile
             }
         };
 
@@ -81,13 +91,19 @@ public class MainActivity extends AppCompatActivity {
         buttonDivisione.setOnClickListener(operationListener);
 
         // Bottone CANC per cancellare tutto
-        buttonCANC.setOnClickListener(v -> textView.setText(""));
+        buttonCANC.setOnClickListener(v -> {
+            textView.setText("");
+            virgolaInserita = false;
+        });
 
         // Bottone per eliminare l'ultimo carattere
         buttonEliminaultimonum.setOnClickListener(v -> {
             String currentText = textView.getText().toString();
             if (!currentText.isEmpty()) {
                 textView.setText(currentText.substring(0, currentText.length() - 1));
+                if (currentText.substring(currentText.length() - 1).equals(".")) {
+                    virgolaInserita = false;
+                }
             }
         });
 
@@ -101,19 +117,41 @@ public class MainActivity extends AppCompatActivity {
             String espressione = textView.getText().toString();
             BigDecimal risultato = valutaEspressione(espressione);
             textView.setText(risultato.toPlainString());
+            virgolaInserita = false;
         } catch (Exception e) {
             textView.setText("Errore");
+            virgolaInserita = false;
         }
     }
 
     private BigDecimal valutaEspressione(String espressione) {
+        // Verifica se l'espressione è vuota
+        if (espressione.trim().isEmpty()) {
+            textView.setText("Errore: espressione vuota");
+            return BigDecimal.ZERO;
+        }
+        // Verifica se l'espressione inizia o finisce con un operatore
+        if ("+-*/".indexOf(espressione.charAt(0)) != -1 || "+-*/".indexOf(espressione.charAt(espressione.length() - 1)) != -1) {
+            textView.setText("Errore: espressione non valida");
+            return BigDecimal.ZERO;
+        }
+        // Verifica se ci sono due operatori consecutivi
+        for (int i = 0; i < espressione.length() - 1; i++) {
+            if ("+-*/".indexOf(espressione.charAt(i)) != -1 && "+-*/".indexOf(espressione.charAt(i + 1)) != -1) {
+                textView.setText("Errore: espressione non valida");
+                return BigDecimal.ZERO;
+            }
+        }
         Stack<BigDecimal> numeri = new Stack<>();
         Stack<Character> operazioni = new Stack<>();
 
         for (int i = 0; i < espressione.length(); i++) {
             char c = espressione.charAt(i);
+            if (Character.isWhitespace(c)) { // Ignora gli spazi
+                continue;
+            }
 
-            if (Character.isDigit(c)) {
+            if (Character.isDigit(c) || c == '.') {
                 StringBuilder numero = new StringBuilder();
                 while (i < espressione.length() && (Character.isDigit(espressione.charAt(i)) || espressione.charAt(i) == '.')) {
                     numero.append(espressione.charAt(i++));
@@ -132,24 +170,41 @@ public class MainActivity extends AppCompatActivity {
             eseguiOperazione(numeri, operazioni.pop());
         }
 
-
-
         return numeri.pop();
     }
 
     private int precedenza(char operatore) {
-        return (operatore == '+' || operatore == '-'|| operatore == '*' || operatore == '/') ? 1 : 2 ;
+        if (operatore == '*' || operatore == '/') {
+            return 2;
+        } else if (operatore == '+' || operatore == '-') {
+            return 1;
+        }
+        return 0; // Operatore non valido
     }
 
     private void eseguiOperazione(Stack<BigDecimal> numeri, char operatore) {
         BigDecimal b = numeri.pop();
         BigDecimal a = numeri.pop();
 
+        if (operatore == '/' && b.compareTo(BigDecimal.ZERO) == 0) {
+            textView.setText("Errore: divisione per zero");
+            numeri.push(BigDecimal.ZERO); // Evita di far crashare l'app
+            return;
+        }
+
         switch (operatore) {
-            case '+': numeri.push(a.add(b)); break;
-            case '-': numeri.push(a.subtract(b)); break;
-            case '*': numeri.push(a.multiply(b)); break;
-            case '/': numeri.push(a.divide(b, 10, BigDecimal.ROUND_HALF_UP)); break;
+            case '+':
+                numeri.push(a.add(b));
+                break;
+            case '-':
+                numeri.push(a.subtract(b));
+                break;
+            case '*':
+                numeri.push(a.multiply(b));
+                break;
+            case '/':
+                numeri.push(a.divide(b, 10, BigDecimal.ROUND_HALF_UP));
+                break;
         }
     }
 }
