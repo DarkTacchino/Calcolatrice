@@ -132,6 +132,8 @@ public class MainActivity extends AppCompatActivity {
             eseguiOperazione(numeri, operazioni.pop());
         }
 
+
+
         return numeri.pop();
     }
 
