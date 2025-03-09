@@ -13,7 +13,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.95">
 
         <TableRow
@@ -27,8 +26,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/clear"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:backgroundTint="#DD2C00"/>
+
+
 
             <Button
                 android:id="@+id/parenthesesBTN"
@@ -37,8 +41,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/parentheses"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/exponentBTN"
@@ -47,8 +53,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/exponent"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/divideBTN"
@@ -57,8 +65,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/divide"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
         </TableRow>
 
@@ -73,8 +83,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/seven"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/eightBTN"
@@ -83,8 +95,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/eight"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/nineBTN"
@@ -93,8 +107,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/nine"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/multiplyBTN"
@@ -103,8 +119,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/multiply"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
         </TableRow>
 
@@ -119,8 +137,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/four"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/button18"
@@ -129,8 +149,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/five"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/button19"
@@ -139,8 +161,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/six"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/subtractBTN"
@@ -149,8 +173,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/subtract"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
         </TableRow>
 
@@ -165,8 +191,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/one"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/twoBTN"
@@ -175,8 +203,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/two"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/threeBTN"
@@ -185,8 +215,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/three"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/addBTN"
@@ -195,8 +227,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/add"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
         </TableRow>
 
@@ -211,8 +245,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/plusMinus"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/zeroBTN"
@@ -221,8 +257,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/zero"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/pointBTN"
@@ -231,8 +269,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/point"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/equalsBTN"
@@ -241,27 +281,38 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/equals"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:background="@drawable/circle"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:textSize="24sp"
+                android:backgroundTint="#43A047"/>
         </TableRow>
     </TableLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/display"
+        android:text="Enter in a value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="false"
+        android:inputType="none"
+        android:textSize="36sp"
+        android:textAlignment="textEnd"
+        tools:ignore="LabelFor" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/backspace"
+        android:layout_margin="5dp"
+        android:contentDescription="@string/backspace"
+        android:background="@drawable/circle"
+        app:srcCompat="@drawable/backspace"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
