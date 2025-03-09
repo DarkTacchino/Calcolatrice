@@ -3,7 +3,7 @@
 
     <string name="zero">0</string>
     <string name="one">1</string>
-    <string name="teo">2</string>
+    <string name="two">2</string>
     <string name="three">3</string>
     <string name="four">4</string>
     <string name="five">5</string>
@@ -24,5 +24,7 @@
     <string name="equals">=</string>
 
     <string name="backspace"> </string>
+
+    <string name="display">Enter in a value</string>
 
 </resources>
