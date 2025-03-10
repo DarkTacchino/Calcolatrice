@@ -16,14 +16,11 @@ public class MainActivity extends AppCompatActivity {
         display = findViewById(R.id.display);
         display.setShowSoftInputOnFocus(false);
 
-        display.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (getString(R.string.display).equals(display.getText().toString())) {
-                    display.setText("");
-                }
-                return true;
+        display.setOnLongClickListener(v -> {
+            if (getString(R.string.display).equals(display.getText().toString())) {
+                display.setText("");
             }
+            return true;
         });
     }
     private void updateText(String addstring) {
@@ -43,51 +40,41 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void backspaceBTN(View view) {
-        int cursorPos = display.getSelectionStart();
-        int textLen = display.getText().length();
-
-        if (cursorPos != 0 && textLen != 0) {
-            SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
-            selection.replace(cursorPos - 1, cursorPos, "");
-            display.setText(selection);
-            display.setSelection(cursorPos - 1);
-        }
-    }
-
-    public void plusMinusBTN(View view) {
-        updateText("+/-");
-    }
-
-    public void clearBTN(View view) {
-         display.setText("");
-
-    }
     public void parenthesesBTN(View view) {
         int cursorPos = display.getSelectionStart();
         int openPar = 0;
         int closedPar = 0;
         int textLen = display.getText().length();
 
+        // Evitare errori di accesso a stringhe vuote
+        if (textLen == 0) {
+            updateText("(");
+            display.setSelection(cursorPos + 1);
+            return;
+        }
+
+        // Contiamo le parentesi aperte e chiuse
         for (int i = 0; i < cursorPos; i++) {
-            if (display.getText().toString().substring(i, i + 1).equals("(")) {
-                openPar += 1;
-            }
-            if (display.getText().toString().substring(i, i + 1).equals(")")) {
-                closedPar += 1;
+            String currentChar = display.getText().toString().substring(i, i + 1);
+            if (currentChar.equals("(")) {
+                openPar++;
+            } else if (currentChar.equals(")")) {
+                closedPar++;
             }
         }
 
-        if(openPar == closedPar || display.getText().toString().substring(textLen - 1, textLen).equals("("))
-        {
+        String lastChar = display.getText().toString().substring(textLen - 1, textLen);
+
+        // Logica per inserire parentesi
+        if (openPar == closedPar || lastChar.equals("(")) {
             updateText("(");
-        }
-        else if(closedPar < openPar && !display.getText().toString().substring(textLen - 1, textLen).equals("("))
-        {
+            display.setSelection(cursorPos + 1);
+        } else if (closedPar < openPar && !lastChar.equals(")")) {
             updateText(")");
+            display.setSelection(cursorPos + 1);
         }
-        display.setSelection(cursorPos + 1);
     }
+
     public void pointBTN(View view) {
         updateText(",");
     }
