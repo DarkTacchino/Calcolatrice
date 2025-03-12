@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pointBTN(View view) {
-        updateText(",");
+        updateText(".");
     }
 
     public void exponentBTN(View view) {
@@ -113,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
 
         display.setText(result);
         display.setSelection(result.length());
+    }
+
+    public void plusMinusBTN(View view)
+    {
+        updateText("-");
     }
 
     public void subtractBTN(View view) {
