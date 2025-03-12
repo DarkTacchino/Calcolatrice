@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import org.mariuszgromada.math.mxparser.*;
 import android.view.View;
+import java.text.DecimalFormat;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
@@ -109,15 +110,64 @@ public class MainActivity extends AppCompatActivity {
 
         Expression exp = new Expression(userExp);
 
-        String result = String.valueOf(exp.calculate());
+        double result = exp.calculate();
 
-        display.setText(result);
-        display.setSelection(result.length());
+        DecimalFormat df = new DecimalFormat("#.################"); // Fino a 16 decimali
+        String resultString = df.format(result);
+
+        display.setText(resultString);
+        display.setSelection(resultString.length());
     }
 
-    public void plusMinusBTN(View view)
-    {
-        updateText("-");
+    public void plusMinusBTN(View view) {
+        String text = display.getText().toString();
+        int cursorPos = display.getSelectionStart();
+
+        // Trova l'inizio del numero corrente
+        int start = cursorPos;
+        while (start > 0) {
+            char ch = text.charAt(start - 1);
+            if (Character.isDigit(ch) || ch == '.') {
+                start--;
+            } else if (ch == '-' && (start == 1 || !Character.isDigit(text.charAt(start - 2)))) {
+                // Se il carattere precedente è un meno e è all'inizio o è preceduto da un operatore, consideralo parte del numero.
+                start--;
+            } else {
+                // Se trovi un operatore diverso da '-' o non è preceduto da un numero, interrompi
+                break;
+            }
+        }
+
+        // Gestione del caso in cui start è 0
+        if (start > 0 && text.charAt(start - 1) == '-' && (start == 1 || !Character.isDigit(text.charAt(start - 2)))) {
+            start--;
+        }
+
+        // Estrai il numero corrente
+        String currentNumber = text.substring(start, cursorPos);
+
+        // Se non c'è un numero valido, inserisci semplicemente il "-"
+        if (currentNumber.isEmpty()) {
+            updateText("-");
+            return;
+        }
+
+        // Se il numero inizia con '-', rimuovilo; altrimenti aggiungilo
+        if (currentNumber.startsWith("-")) {
+            // Rimuove il segno meno
+            String newNumber = currentNumber.substring(1);
+            String newText = text.substring(0, start) + newNumber + text.substring(cursorPos);
+            display.setText(newText);
+            // Aggiorna la posizione del cursore spostandolo indietro di 1
+            display.setSelection(cursorPos - 1);
+        } else {
+            // Aggiunge il segno meno
+            String newNumber = "-" + currentNumber;
+            String newText = text.substring(0, start) + newNumber + text.substring(cursorPos);
+            display.setText(newText);
+            // Aggiorna la posizione del cursore spostandolo in avanti di 1
+            display.setSelection(cursorPos + 1);
+        }
     }
 
     public void subtractBTN(View view) {
