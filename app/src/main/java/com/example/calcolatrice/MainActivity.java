@@ -3,6 +3,7 @@ package com.example.calcolatrice;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import org.mariuszgromada.math.mxparser.*;
 import android.view.View;
 import android.widget.EditText;
 
@@ -41,7 +42,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void backspaceBTN(View view)
     {
+        int cursorPos = display.getSelectionStart();
+        int textLen = display.getText().length();
 
+        if (cursorPos != 0 && textLen != 0) {
+            SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
+            selection.replace(cursorPos - 1, cursorPos, "");
+            display.setText(selection);
+            display.setSelection(cursorPos - 1);
+        }
+    }
+
+    public void clearBTN(View view)
+    {
+        display.setText("");
     }
 
     public void parenthesesBTN(View view) {
@@ -88,7 +102,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void equalsBTN(View view) {
-        updateText("=");
+        String userExp = display.getText().toString();
+
+        userExp = userExp.replaceAll("÷", "/");
+        userExp = userExp.replaceAll("x", "*");
+
+        Expression exp = new Expression(userExp);
+
+        String result = String.valueOf(exp.calculate());
+
+        display.setText(result);
+        display.setSelection(result.length());
     }
 
     public void subtractBTN(View view) {
@@ -96,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void multiplyBTN(View view) {
-        updateText("X");
+        updateText("x");
     }
     public void addBTN(View view) {
         updateText("+");
