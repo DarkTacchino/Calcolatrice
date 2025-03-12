@@ -9,6 +9,7 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     private EditText display;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,21 +24,24 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
+
     private void updateText(String addstring) {
         String oldstr = display.getText().toString();
         int cursorPos = display.getSelectionStart();
         String leftStr = oldstr.substring(0, cursorPos);
         String rightStr = oldstr.substring(cursorPos);
-        if(getString(R.string.display).equals(display.getText().toString()))
-        {
+        if (getString(R.string.display).equals(display.getText().toString())) {
             display.setText(addstring);
             display.setSelection(cursorPos + 1);
-        }
-        else
-        {
+        } else {
             display.setText(String.format("%s%s%s", leftStr, addstring, rightStr));
             display.setSelection(cursorPos + 1);
         }
+    }
+
+    public void backspaceBTN(View view)
+    {
+
     }
 
     public void parenthesesBTN(View view) {
